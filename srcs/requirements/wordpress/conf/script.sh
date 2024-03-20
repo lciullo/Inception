@@ -11,7 +11,7 @@ wp core install  --allow-root --url=$DOMAIN_NAME --admin_user=$SQL_ADMIN --admin
 wp user create   --allow-root $SQL_USER example@example.com --user_pass=$SQL_USERPASSWD --path=/var/www/html
 
 fi
- 
- 
+
+mkdir -p /run/php
 /usr/sbin/php-fpm7.4 -F
-php-fpm7.4 -F
+

@@ -9,15 +9,20 @@ DOCKER_COMPOSE = srcs/docker-compose.yml
 # # ---- Launch rules ---- #
 
 all:
+	bash domain_name.sh
 	mkdir -p /home/lciullo/data/mariadb
 	mkdir -p /home/lciullo/data/wordpress
 	docker compose -f ${DOCKER_COMPOSE} up -d --build
 
+
 up: 
+	bash domain_name.sh
 	docker compose -f ${DOCKER_COMPOSE} up -d
+
 
 down:
 	docker compose -f ${DOCKER_COMPOSE} down
+
 
 # # ---- Clean rules ---- #
 
