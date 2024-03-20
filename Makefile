@@ -1,5 +1,3 @@
-# # ---- Utils ---- #
-
 # # ---- Directories ---- #
 
 include srcs/.env

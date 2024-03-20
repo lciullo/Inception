@@ -1,12 +1,10 @@
-version: '3'
-networks:
-  inception:
-    name: inception
-    driver: bridge
-
+version: '3.8'
+         
 services:
+
   mariadb:
     container_name: mariadb
+    image: mariadb
     networks:
       - inception
     build:
@@ -14,19 +12,19 @@ services:
       dockerfile: Dockerfile
       args:
         SQL_DATABASE: $SQL_DATABASE
-        SQL_ROOT_PASSWORD: $SQL_ROOT_PASSWORD
+        SQL_ROOT_PASS: $SQL_ROOT_PASS
         SQL_ADMIN: $SQL_ADMIN
-        SQL_ADMINPASSWD: $SQL_ADMINPASSWD
-        SQL_USER: $SQL_USER
-        SQL_USERPASSWD: $SQL_USERPASSWD
+        SQL_ADMIN_PASS: $SQL_ADMIN_PASS
     env_file: .env
     volumes:
       - mariadb:/var/lib/mysql
     restart: unless-stopped
     expose:
       - "3306"
+  
   nginx:
     container_name: nginx
+    image: nginx
     networks:
       - inception
     build:
@@ -40,8 +38,10 @@ services:
     restart: on-failure
     ports:
       - "443:443"
+
   wordpress:
     container_name: wordpress
+    image: wordpress
     networks:
       - inception
     build:
@@ -58,14 +58,21 @@ services:
 
 volumes:
   wordpress:
+    name: wordpress
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
       device: /home/lciullo/data/wordpress
   mariadb:
+    name: mariadb
     driver: local
     driver_opts:
       type: 'none'
       o: 'bind'
       device: /home/lciullo/data/mariadb
+
+networks:
+  inception:
+    name: inception
+    driver: bridge

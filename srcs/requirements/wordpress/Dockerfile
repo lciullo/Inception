@@ -21,8 +21,8 @@ RUN mv wp-cli-2.7.0.phar /usr/local/bin/wp
 
 #Config file 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
-COPY conf/script.sh /usr/local/bin/script.sh
-RUN chmod +x /usr/local/bin/script.sh
+COPY conf/wp_config.sh /usr/local/bin/wp_config.sh
+RUN chmod +x /usr/local/bin/wp_config.sh
 
 #Launch wordpress 
-CMD ["./usr/local/bin/script.sh"]
+CMD ["./usr/local/bin/wp_config.sh"]
